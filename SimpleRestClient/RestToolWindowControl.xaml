@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="SimpleRestClient.RestToolWindowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             Background="{DynamicResource VsBrush.Window}"
+             Foreground="{DynamicResource VsBrush.WindowText}"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="300"
+             Name="MyToolWindow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="60*" />
+            <RowDefinition Height="60*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" >
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold">Simple REST Client</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*" />
+                <RowDefinition Height="20*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Label Content="Url:" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <TextBox x:Name="urlTextBox"  FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,9,0" />
+            </Grid>
+
+            <!--Method-->
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Label Content="Method:" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <ComboBox x:Name="methodComboBox"   VerticalAlignment="Center" Margin="0,0,9,0" SelectedIndex="2" >
+                    <ListBoxItem >POST</ListBoxItem>
+                    <ListBoxItem >PUT</ListBoxItem>
+                    <ListBoxItem IsSelected="True">GET</ListBoxItem>
+                    <ListBoxItem >DELETE</ListBoxItem>
+                </ComboBox>
+            </Grid>
+
+        </Grid>
+        <TextBox x:Name="sendTextBox" Margin="0,29,10,29"  AcceptsReturn="True"
+                 Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Right" Width="280" TextChanged="textBox_TextChanged"/>
+        <Label Content="Body:" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Grid.Row="2" />
+        <TabControl x:Name="tabControl"  Margin="10" Grid.Row="3" >
+            <TabItem Header="Response">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="responseTextBox"  Margin="0,0,0.4,0.2" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Headers">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="headersTextBox"  Margin="0,0,0.4,0.2" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="sendButton" Content="Send" Margin="108,0,117,5" Grid.Row="2" Click="sendButton_Click" Height="19" VerticalAlignment="Bottom"/>
+    </Grid>
+</UserControl>
