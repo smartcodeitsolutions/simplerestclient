@@ -3,73 +3,97 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             Background="{DynamicResource VsBrush.Window}"
              Foreground="{DynamicResource VsBrush.WindowText}"
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="300"
-             Name="MyToolWindow">
+             d:DesignHeight="603.2" d:DesignWidth="800"
+             Name="SimpleRESTClient" 
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            Background="{DynamicResource MaterialDesignPaper}"
+            TextElement.FontWeight="Medium"
+            TextElement.FontSize="14"
+            FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="60*" />
-            <RowDefinition Height="60*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" >
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold">Simple REST Client</TextBlock>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="4*" />
-            </Grid.ColumnDefinitions>
+        <materialDesign:Card Padding="32" Margin="0" Height="88">
+            <Grid>
+                <TextBlock 
+                       Style="{DynamicResource MaterialDesignTitleTextBlock}" 
+                        >Simple REST Client</TextBlock>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:PackIcon Grid.Column="0" Kind="Web" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" Margin="50,122,0,0" />
+        <TextBox x:Name="urlTextBox"  Margin="83,101,29,0" Height="40" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Url in format http://www.example.com/api/hello"  />
+        <StackPanel Orientation="Horizontal" Margin="103,168,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="314" >
+            <RadioButton Style="{StaticResource MaterialDesignRadioButton}" x:Name="radioButton" Content="GET" HorizontalAlignment="Left"  VerticalAlignment="Top" FontWeight="Normal" GroupName="verbsGroup" IsChecked="True" Checked="radioButton_Checked"/>
+            <RadioButton Style="{StaticResource MaterialDesignRadioButton}" x:Name="radioButton_Copy" Content="POST" HorizontalAlignment="Left"  VerticalAlignment="Top" FontWeight="Normal" GroupName="verbsGroup" Checked="radioButton_Copy_Checked"/>
+            <RadioButton Style="{StaticResource MaterialDesignRadioButton}" x:Name="radioButton_Copy1" Content="PUT" HorizontalAlignment="Left"  VerticalAlignment="Top" FontWeight="Normal" GroupName="verbsGroup" Checked="radioButton_Copy1_Checked"/>
+            <RadioButton Style="{StaticResource MaterialDesignRadioButton}" x:Name="radioButton_Copy2" Content="DELETE" HorizontalAlignment="Left"  VerticalAlignment="Top" FontWeight="Normal" GroupName="verbsGroup" Checked="radioButton_Copy2_Checked"/>
+            <RadioButton Style="{StaticResource MaterialDesignRadioButton}" x:Name="radioButton_Copy3" Content="OPTIONS" HorizontalAlignment="Left"  VerticalAlignment="Top" FontWeight="Normal" GroupName="verbsGroup" Checked="radioButton_Copy3_Checked"/>
+        </StackPanel>
+        <Label  Content="Verb:" Margin="50,165,0,0" Height="33" VerticalAlignment="Top" HorizontalAlignment="Left" Width="65"    />
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20*" />
-                <RowDefinition Height="20*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0">
-                <Label Content="Url:" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            </Grid>
-            <Grid Grid.Row="0" Grid.Column="1">
-                <TextBox x:Name="urlTextBox"  FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,9,0" />
-            </Grid>
-
-            <!--Method-->
-            <Grid Grid.Row="1" Grid.Column="0">
-                <Label Content="Method:" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="1">
-                <ComboBox x:Name="methodComboBox"   VerticalAlignment="Center" Margin="0,0,9,0" SelectedIndex="2" >
-                    <ListBoxItem >POST</ListBoxItem>
-                    <ListBoxItem >PUT</ListBoxItem>
-                    <ListBoxItem IsSelected="True">GET</ListBoxItem>
-                    <ListBoxItem >DELETE</ListBoxItem>
-                </ComboBox>
-            </Grid>
-
-        </Grid>
-        <TextBox x:Name="sendTextBox" Margin="0,29,10,29"  AcceptsReturn="True"
-                 Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Right" Width="280" TextChanged="textBox_TextChanged"/>
-        <Label Content="Body:" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Grid.Row="2" />
-        <TabControl x:Name="tabControl"  Margin="10" Grid.Row="3" >
-            <TabItem Header="Response">
-                <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="responseTextBox"  Margin="0,0,0.4,0.2" TextWrapping="Wrap"/>
+        <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="MaterialDesignFlatButton" Margin="0,159,128,0" HorizontalAlignment="Right" Width="80" VerticalAlignment="Top" Click="Button_Click">SEND</Button>
+        <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="MaterialDesignFlatButton" Margin="0,159,45,0" Content="CANCEL" VerticalAlignment="Top" HorizontalAlignment="Right" Width="83"/>
+        <StackPanel Grid.Row="1" >
+            <Expander HorizontalAlignment="Stretch" x:Name="requestExpander"
+                      Header="Request" IsExpanded="True">
+                <Grid Width="{Binding
+        RelativeSource={RelativeSource     Mode=FindAncestor, AncestorType={x:Type Expander}},
+        Path=ActualWidth}" Height="300" >
+                    <TabControl x:Name="tabControl_Copy"  >
+                        <TabItem Header="Body">
+                            <Grid >
+                                <RichTextBox x:Name="requestTextBox" AcceptsReturn="True"  Margin="0,0,0.4,0.2" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Headers">
+                            <Grid >
+                                <RichTextBox x:Name="headersRequestTextBox"  Margin="0,0,0.4,0.2" >
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Run Text=""/>
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Headers">
-                <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="headersTextBox"  Margin="0,0,0.4,0.2" TextWrapping="Wrap"/>
+            </Expander>
+            <Expander HorizontalAlignment="Stretch" x:Name="responseExpander"
+                      Header="Response">
+                <Grid Width="{Binding
+        RelativeSource={RelativeSource     Mode=FindAncestor, AncestorType={x:Type Expander}},
+        Path=ActualWidth}" Height="150" >
+                    <TabControl x:Name="tabControl" Margin="32,12,32,32.2" Grid.Row="1"   >
+                        <TabItem Header="Response">
+                            <Grid >
+                                <TextBox x:Name="responseTextBox"  Margin="0,0,0.4,0.2" TextWrapping="Wrap"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Headers">
+                            <Grid >
+                                <TextBox x:Name="headersTextBox"  Margin="0,0,0.4,0.2" TextWrapping="Wrap"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
-            </TabItem>
-        </TabControl>
-        <Button x:Name="sendButton" Content="Send" Margin="108,0,117,5" Grid.Row="2" Click="sendButton_Click" Height="19" VerticalAlignment="Bottom"/>
+            </Expander>
+        </StackPanel>
     </Grid>
 </UserControl>

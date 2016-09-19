@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="SimpleRestClient.93a83c1a-0c7f-4fe4-b131-8435a33ee43e" Version="1.0" Language="en-US" Publisher="Ramiro Lugmania" />
+    <Identity Id="SimpleRestClient.93a83c1a-0c7f-4fe4-b131-8435a33ee43e" Version="1.0.1" Language="en-US" Publisher="Ramiro Lugmania" />
     <DisplayName>SimpleRestClient</DisplayName>
-    <Description xml:space="preserve">Rest client for Visual Studio.Rest client for Rest client, Http</Description>
+    <Description xml:space="preserve">Rest client for Visual Studio.</Description>
+    <MoreInfo>https://github.com/smartcodeitsolutions/simplerestclient</MoreInfo>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0]" />
